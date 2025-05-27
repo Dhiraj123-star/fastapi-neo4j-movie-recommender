@@ -1,4 +1,3 @@
-
 ---
 
 # 🎬 Movie Recommender System
@@ -9,11 +8,12 @@ A lightweight, scalable Movie Recommendation System built using **FastAPI** and 
 
 ## 💡 Features
 
-* 📁 Upload movie metadata CSV files (e.g. from Kaggle)
+* 📁 Upload movie metadata CSV files (e.g., from Kaggle)
 * 👤 Create users in the graph database
 * ❤️ Like movies
 * ⭐ Rate movies from 0 to 5
 * 🎯 Get personalized movie recommendations based on collaborative filtering logic
+* 🩺 Health check endpoint `/healthz` for service status monitoring
 
 ---
 
@@ -23,6 +23,7 @@ A lightweight, scalable Movie Recommendation System built using **FastAPI** and 
 * 🧠 Neo4j Graph Database
 * 🐍 Pandas for CSV parsing
 * 🐳 Docker + Docker Compose for containerized deployment
+* 🔐 Environment variables managed via `.env` and `python-dotenv`
 
 ---
 
@@ -32,6 +33,7 @@ A lightweight, scalable Movie Recommendation System built using **FastAPI** and 
 * Add new users to the system
 * Like and rate movies with proper relationships
 * Generate movie recommendations using graph queries
+* Expose a health check endpoint to monitor API and Neo4j connectivity
 
 ---
 
@@ -41,4 +43,3 @@ Interactive API documentation available via Swagger UI at:
 `http://localhost:8000/docs`
 
 ---
-

@@ -27,7 +27,7 @@ def recommend_movies(user_id: str):
     query = """
     MATCH (u:User {id: $user_id})-[r1:RATED]->(m:Movie)<-[r2:RATED]-(other:User)-[r3:RATED]->(rec:Movie)
     WHERE r1.score >= 3 AND r2.score >= 3 AND r3.score >= 4
-      AND NOT (u)-[:RATED]->(rec)
+    AND NOT (u)-[:RATED]->(rec)
     RETURN DISTINCT rec.title AS recommendation
     LIMIT 5
     """
