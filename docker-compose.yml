@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  neo4j:
+    image: neo4j:5.14
+    container_name: neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      NEO4J_AUTH: neo4j/test1234
+    volumes:
+      - neo4j_data:/data
+
+  fastapi:
+    build: .
+    container_name: fastapi
+    ports:
+      - "8000:8000"
+    depends_on:
+      - neo4j
+    volumes:
+      - .:/app
+    env_file:
+      - .env  # Load environment variables for Neo4j credentials
+    working_dir: /app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  neo4j_data:
