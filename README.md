@@ -2,7 +2,7 @@
 
 # 🎬 Movie Recommender System
 
-A lightweight, scalable Movie Recommendation System built using **FastAPI** and **Neo4j** 🚀
+A lightweight, scalable Movie Recommendation System built using **FastAPI**, **Neo4j**, and **OpenSearch** 🚀
 
 ---
 
@@ -13,6 +13,7 @@ A lightweight, scalable Movie Recommendation System built using **FastAPI** and 
 * ❤️ Like movies
 * ⭐ Rate movies from 0 to 5
 * 🎯 Get personalized movie recommendations based on collaborative filtering logic
+* 🔍 Fuzzy search for movies by title
 * 🩺 Health check endpoint `/healthz` for service status monitoring
 
 ---
@@ -21,6 +22,7 @@ A lightweight, scalable Movie Recommendation System built using **FastAPI** and 
 
 * ⚡ FastAPI (Python)
 * 🧠 Neo4j Graph Database
+* 🔎 OpenSearch for fuzzy text search
 * 🐍 Pandas for CSV parsing
 * 🐳 Docker + Docker Compose for containerized deployment
 * 🔐 Environment variables managed via `.env` and `python-dotenv`
@@ -29,11 +31,12 @@ A lightweight, scalable Movie Recommendation System built using **FastAPI** and 
 
 ## 📦 Core Functionality
 
-* Upload movies via CSV and create nodes in Neo4j
-* Add new users to the system
-* Like and rate movies with proper relationships
-* Generate movie recommendations using graph queries
-* Expose a health check endpoint to monitor API and Neo4j connectivity
+* **Movie Upload and Indexing**: Upload movie metadata via CSV, create movie nodes in Neo4j, and index them in OpenSearch for efficient search.
+* **User Management**: Add new users to Neo4j to track preferences and interactions.
+* **Movie Interactions**: Allow users to like and rate movies (0–5), creating relationships in Neo4j for personalized recommendations.
+* **Fuzzy Movie Search**: Search movies by title using OpenSearch’s fuzzy matching, enabling flexible queries with partial matches or typos.
+* **Personalized Recommendations**: Generate movie recommendations using Neo4j graph queries based on collaborative filtering, leveraging user ratings.
+* **Health Monitoring**: Expose a `/healthz` endpoint to monitor API, Neo4j, and OpenSearch connectivity.
 
 ---
 
