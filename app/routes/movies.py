@@ -5,6 +5,7 @@ from io import StringIO
 from app.services.recommender import (
     add_movie, add_user, user_likes_movie, user_rates_movie, recommend_movies
 )
+from app.db import opensearch_conn
 
 router = APIRouter()
 
@@ -34,13 +35,13 @@ async def upload_movies_csv(file: UploadFile = File(...)):
     count = 0
     for _, row in df.iterrows():
         try:
-            add_movie(row['movieId'], row['title'])
+            add_movie(row['movieId'], row['title'])  # Indexes in Neo4j and OpenSearch
             count += 1
         except Exception as e:
             print(f"Skipping row {row['movieId']} due to error: {e}")
             continue
 
-    return {"msg": f"{count} movies added successfully."}
+    return {"msg": f"{count} movies added and indexed successfully."}
 
 @router.post("/users/{user_id}")
 def create_user(user_id: str):
@@ -63,3 +64,10 @@ def rate_movie(user_id: str, movie_id: str, rating: RateRequest):
 def get_recommendations(user_id: str):
     recs = recommend_movies(user_id)
     return {"recommendations": [r["recommendation"] for r in recs]}
+
+@router.get("/search")
+def search_movies(query: str):
+    if not query:
+        raise HTTPException(status_code=400, detail="Query parameter is required")
+    results = opensearch_conn.search_movies(query)
+    return {"results": results}

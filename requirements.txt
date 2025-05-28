@@ -5,3 +5,4 @@ pydantic
 pandas
 python-multipart
 python-dotenv
+opensearch-py==2.7.1

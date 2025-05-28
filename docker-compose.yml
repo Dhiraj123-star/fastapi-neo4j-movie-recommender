@@ -12,6 +12,25 @@ services:
     volumes:
       - neo4j_data:/data
 
+  opensearch:
+    image: opensearchproject/opensearch:2.17.1
+    container_name: opensearch
+    environment:
+      - discovery.type=single-node
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "DISABLE_SECURITY_PLUGIN=true"
+    ports:
+      - "9200:9200"
+      - "9600:9600"
+    volumes:
+      - opensearch_data:/usr/share/opensearch/data
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost:9200 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s
+
   fastapi:
     build: .
     container_name: fastapi
@@ -19,12 +38,13 @@ services:
       - "8000:8000"
     depends_on:
       - neo4j
+      - opensearch
     volumes:
       - .:/app
     env_file:
-      - .env  # Load environment variables for Neo4j credentials
+      - .env
     working_dir: /app
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-
 volumes:
   neo4j_data:
+  opensearch_data:

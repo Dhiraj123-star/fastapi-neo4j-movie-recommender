@@ -1,8 +1,9 @@
-from app.db import neo4j_conn
+from app.db import neo4j_conn, opensearch_conn
 
 def add_movie(movie_id: str, title: str):
     query = "MERGE (m:Movie {id: $movie_id, title: $title})"
     neo4j_conn.query(query, {"movie_id": movie_id, "title": title})
+    opensearch_conn.index_movie(movie_id, title)
 
 def add_user(user_id: str):
     query = "MERGE (u:User {id: $user_id})"
