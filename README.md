@@ -15,6 +15,7 @@ A lightweight, scalable Movie Recommendation System built using **FastAPI**, **N
 * 🎯 Get personalized movie recommendations based on collaborative filtering logic
 * 🔍 Fuzzy search for movies by title
 * 🩺 Health check endpoint `/healthz` for service status monitoring
+* 🚀 Continuous Integration & Deployment (CI/CD) with GitHub Actions and DockerHub
 
 ---
 
@@ -26,6 +27,8 @@ A lightweight, scalable Movie Recommendation System built using **FastAPI**, **N
 * 🐍 Pandas for CSV parsing
 * 🐳 Docker + Docker Compose for containerized deployment
 * 🔐 Environment variables managed via `.env` and `python-dotenv`
+* 🔄 GitHub Actions for CI/CD
+* 🐙 DockerHub (Image Repository: `dhiraj918106/fastapi-neo4j-movie-recommender`)
 
 ---
 
@@ -37,6 +40,7 @@ A lightweight, scalable Movie Recommendation System built using **FastAPI**, **N
 * **Fuzzy Movie Search**: Search movies by title using OpenSearch’s fuzzy matching, enabling flexible queries with partial matches or typos.
 * **Personalized Recommendations**: Generate movie recommendations using Neo4j graph queries based on collaborative filtering, leveraging user ratings.
 * **Health Monitoring**: Expose a `/healthz` endpoint to monitor API, Neo4j, and OpenSearch connectivity.
+* **CI/CD Deployment**: Automatically build and push Docker images to DockerHub on every push to the `main` branch.
 
 ---
 
@@ -44,5 +48,19 @@ A lightweight, scalable Movie Recommendation System built using **FastAPI**, **N
 
 Interactive API documentation available via Swagger UI at:
 `http://localhost:8000/docs`
+
+---
+
+## 🚀 CI/CD Pipeline
+
+This project uses GitHub Actions to:
+
+* ✅ Lint and validate code
+* 🐳 Build Docker images
+* ☁️ Push images to DockerHub: `dhiraj918106/fastapi-neo4j-movie-recommender`
+
+### Triggering CI/CD
+
+CI/CD is triggered automatically on every push to the `main` branch.
 
 ---
